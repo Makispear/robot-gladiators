@@ -1,17 +1,22 @@
+// Players stats
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
-
+// Enemy stats 
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
+        // Welcome screen 
+        window.alert("Welcome to Robot Gladiators!");
 
 var fight = function(enemyName) {
+    // repeat and execute as long as the enemy-robot is alive 
+    while (enemyHealth > 0) {
     // Alert players that they are starting the round
-    window.alert("Welcome to Robot Gladiators!");
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+
+        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
     // if player chooses to fight: 
     if (promptFight === "fight" || promptFight === "FIGHT") {
@@ -44,25 +49,32 @@ var fight = function(enemyName) {
                 window.alert(`${playerName} has decided to skip this fight. Goodbye!`);
         // subtract money form player for skipping 
                 playerMoney = playerMoney - 2;
-            }
+            };
             window.alert(`${playerName} has chosen to skip the fight!`);
-        } else {
+    } else {
             window.alert(`You need to choose a valid option. Try again!`)
-        };
+    };
 
         // GAME STATES 
         // "WIN" - Player robot has defeated all enemy-robots 
             // *FIght all enemy robots
             // *Defeat each enemy-robot 
-        // "LOSE" - Player robot's health is zero or less 
+        // "LOSE" - Player robot's health is zero or less
+    }
 };
-// fight();
-for(var i = 0; i < enemyNames.length; i++) {
-    fight(enemyNames[i]);
-}
 
 for(var i = 0; i < enemyNames.length; i++) {
-    console.log(enemyNames[i]);
-    console.log(i);
-    console.log(enemyName[i] + " is at " + i + " index");
-  }
+        // debugger;
+    // picking enemy name 
+        var pickedEnemyName  = enemyNames[i];
+    // resets health of enemy before proceeding 
+        enemyHealth = 50;
+    // call fight function with enemy-robot 
+        fight(enemyNames[i]);}
+                                            
+
+// for(var i = 0; i < enemyNames.length; i++) {
+//     console.log(enemyNames[i]);
+//     console.log(i);
+//     console.log(enemyName[i] + " is at " + i + " index");}
+                                    
