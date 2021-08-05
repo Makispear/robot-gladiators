@@ -13,54 +13,52 @@ var enemyAttack = 12;
 
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy-robot is alive 
-    while (enemyHealth > 0) {
-    // Alert players that they are starting the round
+    while (enemyHealth > 0 && playerHealth > 0) {
 
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+                    // ROUND STARTS
+            var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
-    // if player chooses to fight: 
-    if (promptFight === "fight" || promptFight === "FIGHT") {
-        // enemy gains damage 
+                    // IF PLAYER SKIPS CONFIRM  
+            if (promptFight === "skip" || promptFight === "SKIP") {
+                var confirmSkip = window.confirm("Are you sure you want to quit?")
+                if (confirmSkip) {
+                    window.alert(`${playerName} has decided to skip this fight. Goodbye!`); 
+                    playerMoney = playerMoney - 10;
+                    console.log(`Player's money: ${playerMoney}`);
+                    break;
+                }
+            };
+
+                    // PLAYERS TURN TO ATTACK 
             enemyHealth = enemyHealth - playerAttack; 
             console.log(
-                `${playerName} attacked ${enemyName}. ${enemyName} now has ${enemyHealth} health left.`
+            `${playerName} attacked ${enemyName}. ${enemyName} now has ${enemyHealth} health left.`
             );
-        // checking enemy's health 
+            // Enemy status 
             if (enemyHealth <= 0) {
                 window.alert(`${enemyName} has died!`);
-            } else {
-                window.alert(`${enemyName} still has ${enemyHealth} health left.`)
-            }
-        // user gains damage 
+                playerMoney = playerMoney + 20;
+                break;
+                } else {
+                    window.alert(`${enemyName} still has ${enemyHealth} health left.`)
+                }
+
+                    // ENEMY'S TURN 
             playerHealth = playerHealth - enemyAttack; 
             console.log(`${enemyName} attacked ${playerName}. ${playerName} now has ${playerHealth} health left.`);
-        // checking player's health 
-            if (playerHealth <=0) {
+            // Player's status 
+            if (playerHealth <= 0) {
                 window.alert(`${playerName} has died!`);
-            } else {
-                window.alert(`${playerName} still has ${playerHealth} health left.`)
-            };
-        // if player chooses to skip  
-    } else if (promptFight === "skip" || promptFight === "SKIP") {
-        // confirming player wants to skip 
-            var confirmSkip = window.confirm("Are you sure you want to quit?")
-        // if yes leave 
-            if (confirmSkip) {
-                window.alert(`${playerName} has decided to skip this fight. Goodbye!`);
-        // subtract money form player for skipping 
-                playerMoney = playerMoney - 2;
-            };
-            window.alert(`${playerName} has chosen to skip the fight!`);
-    } else {
-            window.alert(`You need to choose a valid option. Try again!`)
-    };
-
-        // GAME STATES 
-        // "WIN" - Player robot has defeated all enemy-robots 
-            // *FIght all enemy robots
-            // *Defeat each enemy-robot 
-        // "LOSE" - Player robot's health is zero or less
+                break;
+                } else {
+                    window.alert(`${playerName} still has ${playerHealth} health left.`)
+                }
     }
+            // GAME STATES 
+            // "WIN" - Player robot has defeated all enemy-robots 
+                // *FIght all enemy robots
+                // *Defeat each enemy-robot 
+            // "LOSE" - Player robot's health is zero or less
 };
 
 for(var i = 0; i < enemyNames.length; i++) {
