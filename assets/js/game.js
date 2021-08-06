@@ -54,6 +54,42 @@ var fight = function(enemyName) {
                 }
     }
 };
+
+var shop = function() {
+    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
+    switch(shopOptionPrompt) {
+        case "REFILL": //
+        case "refill":
+            if (playerMoney >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.")
+            playerHealth = playerHealth + 20;
+            playerMoney = playerMoney - 7;
+            } else {
+                window.alert("you don't have enough money!");
+            };
+            break;
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7) {
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+            playerAttack = playerAttack + 6;
+            playerMoney = playerMoney - 7;
+            } else {
+                window.alert("you don't have enough money!");
+            };
+            break;
+        case "LEAVE":
+        case "Leave":
+            window.alert("Leaving store.");
+            break;
+        default:
+            window.alert("You didn't pick a valid option. Try again");
+            shop();
+            break;
+    }
+};
+
         // function to start a new game 
 var startGame = function() {
     // debugger;
@@ -70,6 +106,14 @@ var startGame = function() {
             // debugger;
                 // FIGHT 
             fight(pickedEnemyName);
+            // if we aren't at last enemy 
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+
+                if (storeConfirm) {
+                    shop();
+                }
+            };
             } else {
             window.alert(`You have lost your robot in battle! Game over!`);
             break;
@@ -98,6 +142,8 @@ var endGame = function() {
     }
 
 startGame();
+
+
 
 
 
