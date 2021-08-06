@@ -7,8 +7,11 @@ var playerMoney = 10;
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
-
-
+        // Random number between min and max values
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    return value;
+};
 
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy-robot is alive 
@@ -22,14 +25,15 @@ var fight = function(enemyName) {
                 var confirmSkip = window.confirm("Are you sure you want to quit?")
                 if (confirmSkip) {
                     window.alert(`${playerName} has decided to skip this fight. Goodbye!`); 
-                    playerMoney = playerMoney - 10;
+                    playerMoney = Math.max(0, playerMoney - 10);
                     console.log(`Player's money: ${playerMoney}`);
                     break;
                 }
             };
 
                     // PLAYERS TURN TO ATTACK 
-            enemyHealth = enemyHealth - playerAttack; 
+            var damage = randomNumber(playerAttack - 3, playerAttack);
+            enemyHealth = Math.max(0, enemyHealth - damage);
             console.log(
             `${playerName} attacked ${enemyName}. ${enemyName} now has ${enemyHealth} health left.`
             );
@@ -43,7 +47,8 @@ var fight = function(enemyName) {
                 }
 
                     // ENEMY'S TURN 
-            playerHealth = playerHealth - enemyAttack; 
+            var damage = randomNumber(enemyAttack -3, enemyAttack);
+            playerHealth = Math.max(0, playerHealth - damage);
             console.log(`${enemyName} attacked ${playerName}. ${playerName} now has ${playerHealth} health left.`);
             // Player's status 
             if (playerHealth <= 0) {
@@ -69,7 +74,7 @@ var shop = function() {
                 window.alert("you don't have enough money!");
             };
             break;
-        case "UPGRADE":
+        case "UPGRADE": //
         case "upgrade":
             if (playerMoney >= 7) {
             window.alert("Upgrading player's attack by 6 for 7 dollars.");
@@ -79,16 +84,17 @@ var shop = function() {
                 window.alert("you don't have enough money!");
             };
             break;
-        case "LEAVE":
-        case "Leave":
+        case "LEAVE": //
+        case "leave":
             window.alert("Leaving store.");
             break;
         default:
-            window.alert("You didn't pick a valid option. Try again");
+            window.alert("You didn't pick a valid option. Try again.");
             shop();
             break;
     }
 };
+
 
         // function to start a new game 
 var startGame = function() {
@@ -102,7 +108,7 @@ var startGame = function() {
             window.alert(`Welcome To Robot Gladiators! Round (${i + 1})`);
             var pickedEnemyName  = enemyNames[i];
                 // Reset enemy health 
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40, 60);
             // debugger;
                 // FIGHT 
             fight(pickedEnemyName);
@@ -143,14 +149,3 @@ var endGame = function() {
 
 startGame();
 
-
-
-
-
-                                            
-
-// for(var i = 0; i < enemyNames.length; i++) {
-//     console.log(enemyNames[i]);
-//     console.log(i);
-//     console.log(enemyName[i] + " is at " + i + " index");}
-                                    
