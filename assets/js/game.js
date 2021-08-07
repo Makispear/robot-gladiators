@@ -116,19 +116,18 @@ var fight = function(enemy) {
 
 // Shop feature to get more health, upgrade your attack or refill your health
 var shop = function() {
-    var shopOptionPrompt = window.prompt(`Would you like to "REFILL" health, "UPGRADE" attack, or "LEAVE" store? Type refill, upgrade or leave.`);
+    var shopOptionPrompt = window.prompt(`Would you like to "REFILL" health, "UPGRADE" attack, or "LEAVE" store? Type 1:(refill), 2:(upgrade) or 3:(leave).`);
+    // debugger;
+    parseInt(shopOptionPrompt);
     switch(shopOptionPrompt) {
         // functions inside array: line 16
-        case "REFILL": //
-        case "refill":
+        case "1":
             playerInfo.refillHealth(); 
             break;
-        case "UPGRADE": //
-        case "upgrade":
+        case "2":
             playerInfo.upgradeAttack();
             break;
-        case "LEAVE": //
-        case "leave":
+        case "3":
             window.alert("Leaving store.");
             break;
         default:
