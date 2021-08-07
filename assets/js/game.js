@@ -182,23 +182,29 @@ var startGame = function() {
 var endGame = function() {
     // if player is alive they win 
     if (playerInfo.health > 0) {
-        window.alert(`Great job, you've survived the game! You now have a score of ${playerInfo.attack}.`)
+        window.alert('The game has ended now. Lets see how you did?');
+        var highscore = localStorage.getItem("highscore");
+        if (highscore = null) {
+            highscore = 0;
+        };
+        if (playerInfo.money > highscore) {
+            localStorage.setItem("highscore", playerInfo.money);
+            localStorage.setItem("name", playerInfo.name);
+            alert(`${playerInfo.name} now has the highest score of ${playerInfo.money}!`);
         } else {
-            window.alert("You've lost your robot in battle")
+            alert(`${playerInfo.name} didn't beat the highest score of ${highscore}. Maybe next time!`);
         };
         // ask player if they want to play again 
-    var playAgainConfirm = window.confirm("would you like to play again?");
-
-    if (playAgainConfirm) {
-        // restart 
-        startGame()
-        } else {
-        window.alert("Thank you for playing Root GLadiators! come back soon!");
-        };
-
-    }
+        var playAgainConfirm = window.confirm("would you like to play again?");
+        if (playAgainConfirm) {
+            // restart 
+            startGame()
+            } else {
+            window.alert("Thank you for playing Root GLadiators! come back soon!");
+            };
+    };
+};
 
 
 // THIS EXECUTES THE GAME: COMMENT OUT TO STOP
             startGame();
-
