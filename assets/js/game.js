@@ -79,12 +79,18 @@ var FightOrSkip = function() {
 
 // This is the fighting logic in one function
 var fight = function(enemy) {
+    var isPlayerTurn = true;
+    if (Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
     // repeat and execute as long as the enemy-robot is alive 
     while (enemy.health > 0 && playerInfo.health > 0) {
-                    // ROUND STARTS
+        if (isPlayerTurn) {
             if (FightOrSkip()) {
                 break;
             }
+        
+               // ROUND STARTS
                     // PLAYERS TURN TO ATTACK 
             var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
             enemy.health = Math.max(0, enemy.health - damage);
@@ -94,23 +100,28 @@ var fight = function(enemy) {
             // Enemy status 
             if (enemy.health <= 0) {
                 window.alert(`${enemy.name} has died!`);
-                playerInfo.attack = playerInfo.attack + 20;
+                playerInfo.money = playerInfo.money + 20;
                 break;
                 } else {
                     window.alert(`${enemy.name} still has ${enemy.health} health left.`)
                 }
-
-                    // ENEMY'S TURN 
-            var damage = randomNumber(enemy.attack -3, enemy.attack);
+        } else {
+               // ROUND STARTS
+                    // Enemy attacks First 
+            var damage = randomNumber(enemy.attack - 3, enemy.attack);
             playerInfo.health = Math.max(0, playerInfo.health - damage);
-            console.log(`${enemy.name} attacked ${playerInfo.name}. ${playerInfo.name} now has ${playerInfo.health} health left.`);
-            // Player's status 
+            console.log(
+            `${enemy.name} attacked ${playerInfo.name}. ${playerInfo.name} now has ${playerInfo.health} health left.`
+            );
+            // Player status 
             if (playerInfo.health <= 0) {
                 window.alert(`${playerInfo.name} has died!`);
                 break;
                 } else {
                     window.alert(`${playerInfo.name} still has ${playerInfo.health} health left.`)
                 }
+        }
+            isPlayerTurn = !isPlayerTurn;
     }
 };
 
