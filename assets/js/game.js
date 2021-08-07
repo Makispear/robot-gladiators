@@ -6,7 +6,7 @@ var randomNumber = function(min, max) {
 // Player's Name {function}
 var getPlayerName = function() {
     var name = "";
-    while (name === "" || name === "null") {
+    while (name === "" || name === null) {
         name = prompt(`What is your robot's name?`)
     }
 
